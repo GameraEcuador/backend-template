@@ -38,14 +38,6 @@
     "node": ">=16.0.0",
     "npm": ">=8.0.0"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/gamera-ecuador/backend-template.git"
-  },
-  "bugs": {
-    "url": "https://github.com/gamera-ecuador/backend-template/issues"
-  },
-  "homepage": "https://github.com/gamera-ecuador/backend-template#readme",
   "files": [
     "dist",
     "src",
