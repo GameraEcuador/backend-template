@@ -13,7 +13,7 @@ export class MongoDataBase {
         const { connectionUrl, dbName } = options;
 
         try {
-            logger.info(` Connecting to MongoDB at ${connectionUrl}`);
+            logger.info(`Connecting to MongoDB at ${connectionUrl}`);
             await mongoose.connect(connectionUrl, { dbName });
             logger.info(`Connected to MongoDB: ${dbName}`);
         } catch (error) {
