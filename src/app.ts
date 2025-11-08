@@ -1,9 +1,13 @@
 import { envs } from "./config/envs.config.js";
-import { Logger } from "./config/logger.config.js";
-
-const logger = Logger.getInstance();
+import { MongoDataBase } from "./config/mongodb.config.js";
 
 (async () => {
-    logger.info(`Starting server on port ${envs.PORT}...`);
-
+    main();
 })();
+
+async function main() {
+    await MongoDataBase.connect({
+        connectionUrl: envs.DB_MONGO_URL,
+        dbName: envs.DB_MONGO_NAME,
+    });
+}
