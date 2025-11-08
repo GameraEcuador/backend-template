@@ -3,6 +3,7 @@ import cors from "cors";
 import express, { Router } from "express";
 import { Logger } from './config/logger.config.js';
 
+
 interface Options {
     port: number;
     routes: Router;
@@ -29,6 +30,7 @@ export class Server {
     private middlewares() {
         const originsArray: string[] = this.origins.split(',').map(origin => origin.trim());
         this.logger.info(`CORS Origins: ${JSON.stringify(originsArray)}`);
+        this.app.use(express.json());
         this.app.use(this.cors({
             origin: originsArray,
             methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
