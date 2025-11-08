@@ -1,0 +1,66 @@
+{
+  "name": "backend-template",
+  "version": "1.0.0",
+  "description": "Plantilla de backend con TypeScript, Node.js, Express, Socket.io y Node-mailer. Lista para desarrollo rápido de APIs modernas.",
+  "main": "dist/index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "start": "node dist/index.js",
+    "build": "tsc -p tsconfig.json",
+    "clean": "rimraf dist",
+    "build:clean": "npm run clean && npm run build"
+  },
+  "keywords": [
+    "backend",
+    "template",
+    "typescript",
+    "node",
+    "express",
+    "socket.io",
+    "nodemailer",
+    "api",
+    "rest",
+    "server",
+    "boilerplate",
+    "starter",
+    "plantilla",
+    "gamera",
+    "ecuador"
+  ],
+  "author": {
+    "name": "Gamera Ecuador",
+    "email": "soporte@gameraecuador.com",
+    "url": "https://www.gameraecuador.com"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gamera-ecuador/backend-template.git"
+  },
+  "bugs": {
+    "url": "https://github.com/gamera-ecuador/backend-template/issues"
+  },
+  "homepage": "https://github.com/gamera-ecuador/backend-template#readme",
+  "files": [
+    "dist",
+    "src",
+    "README.md",
+    "tsconfig.json"
+  ],
+  "devDependencies": {
+    "@types/node": "^24.10.0",
+    "rimraf": "^5.0.5",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "socket.io": "^4.7.4",
+    "nodemailer": "^6.9.7"
+  }
+}
