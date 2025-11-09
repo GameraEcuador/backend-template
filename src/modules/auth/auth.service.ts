@@ -1,11 +1,16 @@
-import { AuthRepository } from "./auth.repository.js";
+import { Logger } from "../../config/logger.config.js"
+import { AuthRepository } from "./auth.repository.js"
 
 export class AuthService {
 
-    constructor(private authRepository: AuthRepository) { }
+    private readonly logger = Logger.getInstance()
+    constructor(
+        private readonly authRepository: AuthRepository
+    ) { }
 
     login(email: string, password: string) {
-        this.authRepository.login(email, password);
+
+        this.logger.debug(`User with email: ${email} and password: ${password}`)
         return {
             email,
             password

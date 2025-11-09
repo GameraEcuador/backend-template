@@ -14,10 +14,10 @@ export class AuthRoutes {
         const authService = new AuthService(authRepository);
         const authController = new AuthController(authService);
 
-        router.post('/login', validate(loginSchema), authController.login);
-        // router.post('/register', validate(registerSchema), AuthController.register);
-        // router.get('/renew', AuthController.renew);
-
+        router.post('/login',
+            validate(loginSchema),
+            authController.login
+        );
         return router;
     }
 }
