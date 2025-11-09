@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { AuthService } from "./auth.service.js";
-import { loginSchema } from "./auth.validation.js";
+import { loginSchema } from "./auth.validations.js";
 import { AuthRepository } from "./auth.repository.js";
 import { AuthController } from "./auth.controller.js";
 import { validate } from "../../middlewares/validate-request.middleware.js";

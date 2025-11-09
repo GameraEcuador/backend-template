@@ -15,8 +15,7 @@ export class MongoDataBase {
             await mongoose.connect(connectionUrl, { dbName });
             logger.info(`Connected to MongoDB: ${dbName}`);
         } catch (error) {
-            const err = error as Error;
-            // logger.error("Error connecting to MongoDB", { error: err });
+            logger.error(error, "Failed to connect to MongoDB");
             throw error;
         }
     }

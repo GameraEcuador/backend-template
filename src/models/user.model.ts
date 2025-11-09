@@ -1,8 +1,10 @@
 import { model, Schema } from "mongoose";
+import { createTransform } from "../helpers/mongooseTransform.js";
 
 interface UserModel {
     id: string;
-    username: string;
+    name: string;
+    lastName: string;
     password: string;
     email: string;
     createdAt: Date;
@@ -10,11 +12,21 @@ interface UserModel {
 }
 
 const userSchema = new Schema<UserModel>({
-    username: { type: String, required: true, unique: true },
+    name: { type: String, required: true },
+    lastName: { type: String, required: true },
     password: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now },
-});
+},
+    {
+        versionKey: false,
+        toJSON: {
+            virtuals: true,
+            transform: createTransform('password')
+        }
+    }
+
+);
 
 export const UserModel = model<UserModel>('User', userSchema);
