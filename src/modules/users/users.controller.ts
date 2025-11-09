@@ -9,12 +9,12 @@ export class UsersController {
 
     create = async (req: Request, res: Response) => {
         const body = req.body;
-        const [isCreated, data] = await this.usersService.create(body);
+        const [isCreated, data, message] = await this.usersService.create(body);
 
         if (!isCreated || !data) {
             res.status(400).json({
                 ok: false,
-                msg: 'User could not be created',
+                msg: message || 'Este usuario no pudo ser creado',
                 content: null
             });
             return;
@@ -22,7 +22,7 @@ export class UsersController {
 
         res.status(201).json({
             ok: true,
-            msg: `User ${data.name} created successfully`,
+            msg: `El ${data.name} fue creado exitosamente`,
             content: data
         });
         return

@@ -10,6 +10,11 @@ export class UsersRepository {
         return createdUser;
     }
 
+    findByEmail = async (email: string): Promise<User | null> => {
+        const user = await UserModel.findOne({ email });
+        return user;
+    }
+
     update = () => { }
     delete = () => { }
     getById = () => { }

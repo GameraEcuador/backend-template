@@ -4,6 +4,7 @@ import express, { Router } from "express";
 
 import { logger } from './config/logger.config.js';
 import { httpLogger } from './middlewares/logger-request.middleware.js';
+import { errorMiddleware } from './middlewares/error.middleware.js';
 
 interface Options {
     port: number;
@@ -41,6 +42,7 @@ export class Server {
             allowedHeaders: ['Content-Type', 'Authorization']
         }));
         this.app.use(this.routes);
+        this.app.use(errorMiddleware);
     }
 
     async start() {
