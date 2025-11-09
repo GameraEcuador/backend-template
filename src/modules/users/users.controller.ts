@@ -9,23 +9,12 @@ export class UsersController {
 
     create = async (req: Request, res: Response) => {
         const body = req.body;
-        const [isCreated, data, message] = await this.usersService.create(body);
-
-        if (!isCreated || !data) {
-            res.status(400).json({
-                ok: false,
-                msg: message || 'Este usuario no pudo ser creado',
-                content: null
-            });
-            return;
-        }
-
+        const user = await this.usersService.create(body);
         res.status(201).json({
             ok: true,
-            msg: `El ${data.name} fue creado exitosamente`,
-            content: data
+            msg: `El ${user.name} fue creado exitosamente`,
+            content: user
         });
-        return
     }
 
     update = (req: Request, res: Response) => { }

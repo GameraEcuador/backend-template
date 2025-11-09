@@ -1,3 +1,4 @@
+import { HandlerErrors } from "../../helpers/handler-errors.js";
 import { User } from "./users.interface.js"
 import { UsersRepository } from "./users.repository.js"
 
@@ -6,13 +7,14 @@ export class UsersService {
         private readonly usersRepository: UsersRepository
     ) { }
 
-    create = async (data: User): Promise<[boolean, User | null, string?]> => {
+    create = async (data: User): Promise<User> => {
         const existingUser = await this.usersRepository.findByEmail(data.email);
-        if (existingUser) {
-            return [false, null, 'Este correo ya está registrado'];
-        }
+        if (existingUser) HandlerErrors.badRequest('Este correo ya está registrado');
+
         const createdUser = await this.usersRepository.create(data);
-        return createdUser ? [true, createdUser] : [false, null, 'No se pudo crear el usuario'];
+        if (!createdUser) HandlerErrors.badRequest('No se pudo crear el usuario');
+
+        return createdUser!;
     }
 
     update = () => { }
