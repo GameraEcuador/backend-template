@@ -1,5 +1,5 @@
 import { model, Schema } from "mongoose";
-import { createTransform } from "../helpers/mongooseTransform.js";
+import { createTransform } from "../helpers/mongoose-transform.helper.js";
 
 interface UserModel {
     id: string;
