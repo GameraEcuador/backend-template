@@ -1,12 +1,10 @@
 import mongoose from "mongoose";
-import { Logger } from "./logger.config.js";
+import { logger } from "./logger.config.js";
 
 interface MongoOptions {
     connectionUrl: string;
     dbName: string;
 }
-
-const logger = Logger.getInstance();
 
 export class MongoDataBase {
     static async connect(options: MongoOptions): Promise<void> {
@@ -17,7 +15,8 @@ export class MongoDataBase {
             await mongoose.connect(connectionUrl, { dbName });
             logger.info(`Connected to MongoDB: ${dbName}`);
         } catch (error) {
-            logger.error("Error connecting to MongoDB", { error });
+            const err = error as Error;
+            // logger.error("Error connecting to MongoDB", { error: err });
             throw error;
         }
     }

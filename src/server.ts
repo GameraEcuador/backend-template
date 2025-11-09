@@ -1,8 +1,9 @@
 import http from 'http';
 import cors from "cors";
 import express, { Router } from "express";
-import { Logger } from './config/logger.config.js';
 
+import { logger } from './config/logger.config.js';
+import { httpLogger } from './middlewares/logger-request.middleware.js';
 
 interface Options {
     port: number;
@@ -17,7 +18,8 @@ export class Server {
     private readonly routes: Router;
     private readonly origins: string;
     private readonly app = express();
-    private readonly logger = Logger.getInstance();
+    private readonly jsonParser = express.json();
+    private readonly httpLogger = httpLogger();
     private readonly server = http.createServer(this.app);
 
     constructor(options: Options) {
@@ -29,8 +31,10 @@ export class Server {
 
     private middlewares() {
         const originsArray: string[] = this.origins.split(',').map(origin => origin.trim());
-        this.logger.info(`CORS Origins: ${JSON.stringify(originsArray)}`);
-        this.app.use(express.json());
+        logger.info(`CORS Origins: ${JSON.stringify(originsArray)}`);
+
+        this.app.use(this.httpLogger);
+        this.app.use(this.jsonParser);
         this.app.use(this.cors({
             origin: originsArray,
             methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
@@ -42,7 +46,7 @@ export class Server {
     async start() {
         this.middlewares();
         this.server.listen(this.port, () => {
-            this.logger.info(`Server is running on port ${this.port}`);
+            logger.info(`Server is running on port ${this.port}`);
         });
     }
 
