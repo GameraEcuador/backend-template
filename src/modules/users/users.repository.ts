@@ -15,9 +15,21 @@ export class UsersRepository {
         return user;
     }
 
-    update = () => { }
-    delete = () => { }
-    getById = () => { }
-    getAll = () => { }
+    getAll = async () => await UserModel.find();
+
+    getById = async (id: string): Promise<User | null> => {
+        const user = await UserModel.findById(id);
+        return user;
+    }
+
+    update = async (id: string, user: Partial<User>) => {
+        const updatedUser = await UserModel.findByIdAndUpdate(id, user, { new: true });
+        return updatedUser;
+    }
+
+    delete = async (id: string) => {
+        const deletedUser = await UserModel.findByIdAndDelete(id);
+        return deletedUser;
+    }
 
 }

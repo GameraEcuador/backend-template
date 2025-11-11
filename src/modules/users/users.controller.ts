@@ -15,10 +15,43 @@ export class UsersController {
             msg: `El ${user.name} fue creado exitosamente`,
             content: user
         });
+    };
+    getAll = async (_: Request, res: Response) => {
+        const users = await this.usersService.getAll();
+        res.status(200).json({
+            ok: true,
+            content: users
+        });
+    };
+    getById = async (req: Request, res: Response) => {
+        const { id } = req.params;
+        const user = await this.usersService.getById(id);
+        res.status(200).json({
+            ok: true,
+            msg: `Usuario con ID ${id} obtenido exitosamente`,
+            content: user
+        });
     }
 
-    update = (req: Request, res: Response) => { }
-    delete = (req: Request, res: Response) => { }
-    getById = (req: Request, res: Response) => { }
-    getAll = (req: Request, res: Response) => { }
+    update = async (req: Request, res: Response) => {
+        const { id } = req.params;
+        const body = req.body;
+        const updatedUser = await this.usersService.update(id, body);
+        res.status(200).json({
+            ok: true,
+            msg: `Usuario con ID ${id} actualizado exitosamente`,
+            content: updatedUser
+        });
+    }
+    delete = async (req: Request, res: Response) => {
+        const { id } = req.params;
+        const deletedUser = await this.usersService.delete(id);
+        res.status(200).json({
+            ok: true,
+            msg: `Usuario con ID ${id} eliminado exitosamente`,
+            content: deletedUser
+        });
+
+
+    }
 }

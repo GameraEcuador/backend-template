@@ -17,8 +17,23 @@ export class UsersService {
         return createdUser!;
     }
 
-    update = () => { }
-    delete = () => { }
-    getById = () => { }
-    getAll = () => { }
+    getAll = async () => await this.usersRepository.getAll();
+
+    getById = async (id: string) => {
+        const user = await this.usersRepository.getById(id);
+        if (!user) HandlerErrors.notFound('Usuario no encontrado');
+        return user;
+    }
+
+    update = async (id: string, user: Partial<User>) => {
+        const updatedUser = await this.usersRepository.update(id, user);
+        if (!updatedUser) HandlerErrors.notFound('Usuario no encontrado');
+        return updatedUser;
+    }
+
+    delete = async (id: string) => {
+        const deletedUser = await this.usersRepository.delete(id);
+        if (!deletedUser) HandlerErrors.notFound('Usuario no encontrado');
+        return deletedUser;
+    }
 }

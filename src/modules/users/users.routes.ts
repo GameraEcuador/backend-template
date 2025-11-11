@@ -3,7 +3,7 @@ import { UsersRepository } from "./users.repository.js";
 import { UsersService } from "./users.service.js";
 import { UsersController } from "./users.controller.js";
 import { validate } from "../../middlewares/validate-request.middleware.js";
-import { createUserSchema } from "./users.validations.js";
+import { createUserSchema, getUserByIdSchema } from "./users.validations.js";
 
 export class UserRoutes {
 
@@ -14,11 +14,11 @@ export class UserRoutes {
         const usersService = new UsersService(usersRepository);
         const usersController = new UsersController(usersService);
 
+        router.get('/', usersController.getAll);
         router.post('/create', validate(createUserSchema), usersController.create);
-        // router.post('/get-all');
-        // router.post('/get-by-id/:id');
-        // router.post('/update/:id');
-        // router.post('/delete/:id');
+        router.get('/get-by-id/:id', validate(getUserByIdSchema, 'params'), usersController.getById);
+        router.put('/update/:id', validate(getUserByIdSchema, 'params'), usersController.update);
+        router.delete('/delete/:id', validate(getUserByIdSchema, 'params'), usersController.delete);
 
         return router;
     }
