@@ -21,6 +21,23 @@ Abre una terminal en la raíz del proyecto y ejecuta:
 npm install
 ```
 
+## Variables de entorno
+
+Crear un .env y poner esta variable
+
+```
+# CONFIGURATION
+PORT=8080
+CORS_ORIGINS=http://localhost:8080,http://localhost:3000
+
+# DATABASE ACCESS
+DB_MONGO_URL=mongodb://userMongo:123456@localhost:27017
+DB_MONGO_NAME=testdb
+DB_MONGO_USER=userMongo
+DB_MONGO_PASS=123456
+
+```
+
 ## Scripts útiles
 
 Los scripts que suelen estar en `package.json` (ajusta si tu `package.json` difiere):
