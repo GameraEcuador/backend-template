@@ -3,7 +3,7 @@ import { UsersRepository } from "./users.repository.js";
 import { UsersService } from "./users.service.js";
 import { UsersController } from "./users.controller.js";
 import { validate } from "../../middlewares/validate-request.middleware.js";
-import { createUserSchema, getUserByIdSchema } from "./users.validations.js";
+import { createUserSchema, getUserByIdSchema } from "./users.validate.js";
 
 export class UserRoutes {
 

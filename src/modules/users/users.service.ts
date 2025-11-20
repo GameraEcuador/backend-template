@@ -1,3 +1,4 @@
+import { bcryptAdapter } from "../../adapters/bcrypt.adapter.js";
 import { HandlerErrors } from "../../helpers/handler-errors.js";
 import { User } from "./users.interface.js"
 import { UsersRepository } from "./users.repository.js"
@@ -11,7 +12,10 @@ export class UsersService {
         const existingUser = await this.usersRepository.findByEmail(data.email);
         if (existingUser) HandlerErrors.badRequest('Este correo ya está registrado');
 
-        const createdUser = await this.usersRepository.create(data);
+        const createdUser = await this.usersRepository.create({
+            ...data,
+            password: bcryptAdapter.hash(data.password)
+        });
         if (!createdUser) HandlerErrors.badRequest('No se pudo crear el usuario');
 
         return createdUser!;
